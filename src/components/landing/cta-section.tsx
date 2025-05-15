@@ -5,7 +5,8 @@ import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { Label } from '@/components/ui/label';
 import ScrollReveal from './scroll-reveal';
-import { Input } from '@/components/ui/input'; // Changed from direct input to ShadCN Input
+import { Input } from '@/components/ui/input';
+import { useToast } from "@/hooks/use-toast"; // Import useToast
 
 const CTASection = () => {
   const [name, setName] = useState('');
@@ -14,6 +15,7 @@ const CTASection = () => {
   const [email, setEmail] = useState('');
   const [isEmailValid, setIsEmailValid] = useState(false);
   const [isPhoneValid, setIsPhoneValid] = useState(false);
+  const { toast } = useToast(); // Initialize toast
 
   const validateEmail = (emailToValidate: string) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -52,7 +54,14 @@ const CTASection = () => {
     event.preventDefault();
     // Handle form submission logic here
     console.log({ name, phone: rawPhone, email }); // Log rawPhone
-    // You'd typically send this data to a server or an email service
+    
+    // Display toast message
+    toast({
+      title: "Sucesso!",
+      description: "Obrigado! Em breve você receberá um contato instruindo como usar nossa busca por assistente!",
+      variant: "default", // Or "success" if you have such a variant
+    });
+
     // Reset form or show success message
     setName('');
     setPhone('');
