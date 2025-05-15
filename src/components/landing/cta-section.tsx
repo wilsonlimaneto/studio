@@ -14,7 +14,7 @@ const CTASection = () => {
   const [email, setEmail] = useState('');
   const [isEmailValid, setIsEmailValid] = useState(false);
   const [isPhoneValid, setIsPhoneValid] = useState(false);
-  const [submissionMessage, setSubmissionMessage] = useState(''); // New state for submission message
+  const [submissionMessage, setSubmissionMessage] = useState('');
 
   const validateEmail = (emailToValidate: string) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -25,14 +25,14 @@ const CTASection = () => {
     const newEmail = event.target.value;
     setEmail(newEmail);
     setIsEmailValid(validateEmail(newEmail));
-    if (submissionMessage) setSubmissionMessage(''); // Clear message on new input
+    if (submissionMessage) setSubmissionMessage('');
   };
 
   const handlePhoneChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const input = event.target.value;
-    const digits = input.replace(/\D/g, ''); // Remove non-digits
+    const digits = input.replace(/\D/g, '');
 
-    const limitedDigits = digits.substring(0, 11); // Limit to 11 digits
+    const limitedDigits = digits.substring(0, 11);
     setRawPhone(limitedDigits);
 
     let masked = '';
@@ -48,22 +48,20 @@ const CTASection = () => {
     setPhone(masked);
 
     setIsPhoneValid(limitedDigits.length === 11);
-    if (submissionMessage) setSubmissionMessage(''); // Clear message on new input
+    if (submissionMessage) setSubmissionMessage('');
   };
 
   const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setName(event.target.value);
-    if (submissionMessage) setSubmissionMessage(''); // Clear message on new input
+    if (submissionMessage) setSubmissionMessage('');
   }
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    // Handle form submission logic here
-    console.log({ name, phone: rawPhone, email }); // Log rawPhone
+    console.log({ name, phone: rawPhone, email });
     
     setSubmissionMessage("Obrigado! Em breve você receberá um contato instruindo como usar nossa busca por assistente!");
 
-    // Reset form fields
     setName('');
     setPhone('');
     setRawPhone('');
@@ -108,7 +106,7 @@ const CTASection = () => {
                 placeholder="(XX) XXXXX-XXXX"
                 value={phone}
                 onChange={handlePhoneChange}
-                maxLength={15} // (XX) XXXXX-XXXX is 15 chars
+                maxLength={15}
                 className="w-full bg-card text-card-foreground placeholder:text-muted-foreground"
               />
             </div>
@@ -124,7 +122,7 @@ const CTASection = () => {
                 className="w-full bg-card text-card-foreground placeholder:text-muted-foreground"
               />
             </div>
-            <Button type="submit" size="lg" className="text-lg px-10 py-6" disabled={!isEmailValid || !isPhoneValid}>
+            <Button type="submit" size="lg" className="text-lg px-10 py-6" disabled={!isEmailValid || !isPhoneValid || !name}>
               Cadastrar para Acesso Gratuito
             </Button>
             {submissionMessage && (
@@ -133,6 +131,23 @@ const CTASection = () => {
               </p>
             )}
           </form>
+        </ScrollReveal>
+
+        <ScrollReveal delay={600} className="mt-12">
+          <div className="flex justify-center">
+            <iframe
+              src="https://docs.google.com/forms/d/e/1FAIpQLSeq3odHZQBWFRmdv9ZgTPdm9JSJe_LKS5oL28gD1XKnbnEiAg/viewform?embedded=true"
+              width="400"
+              height="400"
+              frameBorder="0"
+              marginHeight={0}
+              marginWidth={0}
+              title="Formulário de Contato Google"
+              className="max-w-full"
+            >
+              Carregando…
+            </iframe>
+          </div>
         </ScrollReveal>
       </div>
     </section>
