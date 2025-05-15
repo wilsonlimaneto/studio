@@ -5,15 +5,8 @@ import ScrollReveal from './scroll-reveal';
 
 const HeroSection = () => {
   return (
-    <section className="relative pt-32 pb-16 md:pt-48 md:pb-24 overflow-hidden min-h-[80vh] flex items-center bg-gradient-to-br from-background to-secondary">
-      {/* Subtle background elements if desired, e.g. grid pattern or shapes */}
-      <div
-        aria-hidden="true"
-        className="absolute inset-0 grid grid-cols-2 -space-x-52 opacity-20 dark:opacity-30"
-      >
-        <div className="blur-[106px] h-32 md:h-56 bg-gradient-to-br from-primary to-purple-400 dark:from-blue-700"></div>
-        <div className="blur-[106px] h-16 md:h-32 bg-gradient-to-r from-cyan-400 to-sky-300 dark:to-indigo-600"></div>
-      </div>
+    <section className="relative pt-32 pb-16 md:pt-48 md:pb-24 overflow-hidden min-h-[80vh] flex items-center bg-gradient-to-br from-background to-secondary/80">
+      {/* Removed decorative background blur elements */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid md:grid-cols-2 gap-10 items-center">
           <div className="text-center md:text-left">
@@ -32,7 +25,12 @@ const HeroSection = () => {
                 <Button asChild size="lg" className="text-lg px-8 py-6">
                   <Link href="#cta">Get Started Free</Link>
                 </Button>
-                <Button asChild variant="outline" size="lg" className="text-lg px-8 py-6">
+                <Button
+                  asChild
+                  variant="secondary"
+                  size="lg"
+                  className="text-lg px-8 py-6"
+                >
                   <Link href="#features">Learn More</Link>
                 </Button>
               </div>
@@ -46,13 +44,11 @@ const HeroSection = () => {
                 width={600}
                 height={400}
                 className="rounded-xl shadow-2xl object-cover mx-auto"
-                data-ai-hint="abstract interface"
+                data-ai-hint="abstract interface dark"
                 priority
               />
             </ScrollReveal>
-            {/* Floating elements example */}
-            <div className="absolute -top-8 -right-8 w-24 h-24 bg-primary/20 rounded-full blur-xl animate-pulse hidden md:block" />
-            <div className="absolute -bottom-8 -left-8 w-32 h-32 bg-secondary rounded-lg transform rotate-12 animate-pulse hidden md:block" />
+            {/* Removed floating elements */}
           </div>
         </div>
       </div>
