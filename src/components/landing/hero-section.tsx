@@ -1,3 +1,4 @@
+
 "use client"; // Required for useState and useEffect
 import React from 'react';
 
@@ -14,7 +15,7 @@ const placeholderTexts = [
   "Encontre decisões sobre razoabilidade na demolição de obra diminuta em grande área de preservação ambiental",
   "Ache jurisprudência sobre exclusão de sócio por meio de documento assinado, mas não levado a registro",
 ];
-const TYPING_SPEED_MS = 50; // Adjusted from 100
+const TYPING_SPEED_MS = 50;
 const ROTATION_INTERVAL_MS = 10000; // 10 seconds after typing completes
 
 const carouselImages = [
@@ -117,15 +118,29 @@ const HeroSection = () => {
                 Unimos a facilidade do ChatGPT a julgados <span className="text-primary">verdadeiros e verificados.</span> Experimente o poder de compreensão da busca jurisprudencial <span className="text-primary">semântica:</span>
               </p>
            </ScrollReveal>
-            <ScrollReveal delay={400}>
-              <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-                {/* "Use Gratuitamente" button removed */}
+           <ScrollReveal delay={400} animationType="fadeIn" className="w-full flex justify-center mt-8">
+              <div className="w-full max-w-xl flex flex-col items-center space-y-4 sm:flex-row sm:space-y-0 sm:space-x-2">
+                <div className="relative flex-grow w-full">
+                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+                  <textarea
+                    rows={3}
+                    placeholder={animatedPlaceholder}
+                    className="w-full pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary bg-transparent border-white text-white placeholder-gray-300 resize-none overflow-hidden text-sm md:text-base"
+                    value={inputValue}
+                    onChange={(e) => setInputValue(e.target.value)}
+                    onFocus={() => setIsTypingComplete(true)} // Pause animation on focus
+                  />
+                  {!isTypingComplete && <span className="typing-cursor"></span>}
+                </div>
+                <Button size="lg" className="text-lg px-8 py-3 whitespace-nowrap bg-primary hover:bg-primary/90">
+                  Buscar Jurisprudência Real
+                </Button>
               </div>
-            </ScrollReveal>
+          </ScrollReveal>
           </div>
 
-          {/* Col 2: Contains Carousel and Search Field - Aligned to center */}
-          <div className="flex flex-col items-center space-y-8 md:space-y-10"> 
+          {/* Col 2: Contains Carousel - Aligned to center */}
+          <div className="flex flex-col items-center"> 
             {/* Carousel Section */}
             <ScrollReveal delay={400} animationType="fadeIn" className="w-full flex justify-center">
               <div className="flex justify-center"> 
@@ -152,27 +167,6 @@ const HeroSection = () => {
                   ))}
                 </div>
               </div>
-            </ScrollReveal>
-             
-            <ScrollReveal delay={500} animationType="fadeIn" className="w-full flex justify-center">
-                {/* Search bar section - now below carousel in the same column */}
-                <div className="w-full max-w-xl flex flex-col items-center space-y-4 sm:flex-row sm:space-y-0 sm:space-x-2">
-                  <div className="relative flex-grow w-full">
-                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
-                    <textarea
-                      rows={3}
-                      placeholder={animatedPlaceholder}
-                      className="w-full pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary bg-transparent border-white text-white placeholder-gray-300 resize-none overflow-hidden text-sm md:text-base"
-                      value={inputValue}
-                      onChange={(e) => setInputValue(e.target.value)}
-                      onFocus={() => setIsTypingComplete(true)} // Pause animation on focus
-                    />
-                    {!isTypingComplete && <span className="typing-cursor"></span>}
-                  </div>
-                  <Button size="lg" className="text-lg px-8 py-3 whitespace-nowrap bg-primary hover:bg-primary/90">
-                    Buscar Jurisprudência Real
-                  </Button>
-                </div>
             </ScrollReveal>
           </div>
         </div>
