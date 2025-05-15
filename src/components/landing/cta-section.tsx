@@ -5,15 +5,17 @@ import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { Label } from '@/components/ui/label';
 import ScrollReveal from './scroll-reveal';
+import { Input } from '@/components/ui/input'; // Changed from direct input to ShadCN Input
 
 const CTASection = () => {
   const [name, setName] = useState('');
-  const [phone, setPhone] = useState('');
+  const [phone, setPhone] = useState(''); // Masked phone for display
+  const [rawPhone, setRawPhone] = useState(''); // Raw digits for validation/submission
   const [email, setEmail] = useState('');
   const [isEmailValid, setIsEmailValid] = useState(false);
+  const [isPhoneValid, setIsPhoneValid] = useState(false);
 
   const validateEmail = (emailToValidate: string) => {
-    // Basic email validation regex
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(emailToValidate);
   };
@@ -24,11 +26,40 @@ const CTASection = () => {
     setIsEmailValid(validateEmail(newEmail));
   };
 
+  const handlePhoneChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const input = event.target.value;
+    const digits = input.replace(/\D/g, ''); // Remove non-digits
+
+    const limitedDigits = digits.substring(0, 11); // Limit to 11 digits
+    setRawPhone(limitedDigits);
+
+    let masked = '';
+    if (limitedDigits.length > 0) {
+      masked = `(${limitedDigits.substring(0, 2)}`;
+    }
+    if (limitedDigits.length >= 3) {
+      masked += `) ${limitedDigits.substring(2, 7)}`;
+    }
+    if (limitedDigits.length >= 8) {
+      masked += `-${limitedDigits.substring(7, 11)}`;
+    }
+    setPhone(masked);
+
+    setIsPhoneValid(limitedDigits.length === 11);
+  };
+
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     // Handle form submission logic here
-    console.log({ name, phone, email });
+    console.log({ name, phone: rawPhone, email }); // Log rawPhone
     // You'd typically send this data to a server or an email service
+    // Reset form or show success message
+    setName('');
+    setPhone('');
+    setRawPhone('');
+    setEmail('');
+    setIsEmailValid(false);
+    setIsPhoneValid(false);
   };
 
   return (
@@ -48,41 +79,42 @@ const CTASection = () => {
           <form onSubmit={handleSubmit} className="mt-10 flex flex-col items-center space-y-4">
             <div className="w-full max-w-sm text-left">
               <Label htmlFor="name" className="sr-only">Name</Label>
-              <input
+              <Input
                 id="name"
                 type="text"
                 required
                 placeholder="Name"
                 value={name}
                 onChange={(e) => setName(e.target.value)}
-                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary bg-card text-card-foreground placeholder:text-muted-foreground"
+                className="w-full bg-card text-card-foreground placeholder:text-muted-foreground"
               />
             </div>
             <div className="w-full max-w-sm text-left">
               <Label htmlFor="phone" className="sr-only">Phone</Label>
-              <input
+              <Input
                 id="phone"
                 type="tel"
                 required
-                placeholder="Phone"
+                placeholder="(XX) XXXXX-XXXX"
                 value={phone}
-                onChange={(e) => setPhone(e.target.value)}
-                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary bg-card text-card-foreground placeholder:text-muted-foreground"
+                onChange={handlePhoneChange}
+                maxLength={15} // (XX) XXXXX-XXXX is 15 chars
+                className="w-full bg-card text-card-foreground placeholder:text-muted-foreground"
               />
             </div>
             <div className="w-full max-w-sm text-left">
               <Label htmlFor="email" className="sr-only">Email</Label>
-              <input
+              <Input
                 id="email"
                 type="email"
                 required
                 placeholder="Email"
                 value={email}
                 onChange={handleEmailChange}
-                className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary bg-card text-card-foreground placeholder:text-muted-foreground"
+                className="w-full bg-card text-card-foreground placeholder:text-muted-foreground"
               />
             </div>
-            <Button type="submit" size="lg" className="text-lg px-10 py-6" disabled={!isEmailValid}>
+            <Button type="submit" size="lg" className="text-lg px-10 py-6" disabled={!isEmailValid || !isPhoneValid}>
               Submit
             </Button>
           </form>
