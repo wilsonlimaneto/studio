@@ -14,7 +14,7 @@ const placeholderTexts = [
   "Encontre decisões sobre razoabilidade na demolição de obra diminuta em grande área de preservação ambiental",
   "Ache jurisprudência sobre exclusão de sócio por meio de documento assinado, mas não levado a registro",
 ];
-const TYPING_SPEED_MS = 50;
+const TYPING_SPEED_MS = 50; // Adjusted from 100
 const ROTATION_INTERVAL_MS = 10000; // 10 seconds after typing completes
 
 const carouselImages = [
@@ -119,9 +119,7 @@ const HeroSection = () => {
            </ScrollReveal>
             <ScrollReveal delay={400}>
               <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-                <Button asChild size="lg" className="text-lg px-8 py-6">
-                  <Link href="#cta">Use Gratuitamente</Link>
-                </Button>
+                {/* "Use Gratuitamente" button removed */}
               </div>
             </ScrollReveal>
           </div>
@@ -184,4 +182,3 @@ const HeroSection = () => {
 }
 
 export default HeroSection;
-
