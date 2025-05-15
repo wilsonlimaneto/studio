@@ -133,11 +133,11 @@ const HeroSection = () => {
           </div>
 
           {/* Col 2: Contains Carousel */}
-          <div className="w-full"> {/* Removed flex, flex-col, items-center, space-y-8 */}
+          <div className="w-full"> 
             <ScrollReveal delay={600} animationType="fadeIn" className="w-full mt-10 md:mt-0">
               <div
                 ref={imageCarouselRef}
-                className="relative w-4/5 mx-auto aspect-[4/3] overflow-hidden rounded-lg shadow-lg"
+                className="relative w-[72%] mx-auto aspect-[4/3] overflow-hidden rounded-lg shadow-lg"
               >
                 {carouselImages.map((image, index) => (
                   <div
@@ -150,7 +150,7 @@ const HeroSection = () => {
                       src={image.src}
                       alt={image.alt}
                       fill
-                      sizes="(max-width: 767px) 80vw, 40vw" // Adjusted sizes
+                      sizes="(max-width: 767px) 72vw, 36vw"
                       className="object-cover"
                       data-ai-hint={image.hint}
                       priority={index === 0}
