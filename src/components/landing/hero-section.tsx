@@ -119,18 +119,17 @@ const HeroSection = () => {
               </p>
            </ScrollReveal>
            <ScrollReveal delay={400} animationType="fadeIn" className="w-full flex justify-center md:justify-start mt-8">
-              <div className="w-full max-w-2xl flex flex-col items-center space-y-4 sm:flex-row sm:space-y-0 sm:space-x-2">
+              <div className="w-full flex flex-col items-center space-y-4 sm:flex-row sm:space-y-0 sm:space-x-2">
                 <div className="relative flex-grow w-full">
-                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground" />
+                  <Search className="absolute left-3 top-3 text-muted-foreground" />
                   <textarea
-                    rows={1}
-                    placeholder={animatedPlaceholder}
-                    className="w-full pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary bg-transparent border-white text-white placeholder-gray-300 resize-none overflow-hidden text-sm md:text-base"
+                    rows={4}
+                    placeholder={animatedPlaceholder + (!isTypingComplete ? '|' : '')}
+                    className="w-full pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary bg-transparent border-white text-white placeholder-gray-300 resize-none text-sm md:text-base"
                     value={inputValue}
                     onChange={(e) => setInputValue(e.target.value)}
                     onFocus={() => setIsTypingComplete(true)} // Pause animation on focus
                   />
-                  {!isTypingComplete && <span className="typing-cursor"></span>}
                 </div>
                 <Button size="lg" className="text-lg px-8 py-3 whitespace-nowrap bg-primary hover:bg-primary/90">
                   Buscar
