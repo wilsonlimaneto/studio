@@ -80,7 +80,7 @@ const HeroSection = () => {
   useEffect(() => {
     const imageRotationTimer = setInterval(() => {
       setCurrentCarouselImageIndex((prevIndex) => (prevIndex + 1) % carouselImages.length);
-    }, 5000); // Changed to 5 seconds
+    }, 5000); 
 
     return () => clearInterval(imageRotationTimer);
   }, []);
@@ -98,7 +98,7 @@ const HeroSection = () => {
   return (
     <section className="relative pt-32 pb-16 md:pt-48 md:pb-24 overflow-hidden min-h-[80vh] flex items-center bg-gradient-to-br from-background to-secondary/80">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid md:grid-cols-2 gap-10 items-start"> {/* items-start will align content to the top in columns */}
+        <div className="grid md:grid-cols-2 gap-10 items-start">
           {/* Col 1: Text content + search field */}
           <div className="flex flex-col items-center md:items-start text-center md:text-left">
             <ScrollReveal className="w-full">
@@ -118,7 +118,7 @@ const HeroSection = () => {
                   <Search className="absolute left-3 top-3 text-muted-foreground" />
                   <textarea
                     rows={4}
-                    placeholder={animatedPlaceholder + (!isTypingComplete && !inputValue ? '|' : '')}
+                    placeholder={animatedPlaceholder + ((!isTypingComplete && !inputValue) ? '|' : '')}
                     className="w-full pl-10 xs:pl-8 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary bg-transparent border-white text-white placeholder-gray-300 resize-none text-[1.4375rem] md:text-2xl"
                     value={inputValue}
                     onChange={(e) => setInputValue(e.target.value)}
@@ -135,7 +135,10 @@ const HeroSection = () => {
           {/* Col 2: Contains Carousel */}
           <div className="w-full">
             <ScrollReveal delay={600} animationType="fadeIn" className="w-full mt-10 md:mt-0">
-              <div ref={imageCarouselRef} className="relative w-full aspect-[4/3] overflow-hidden rounded-lg shadow-lg">
+              <div 
+                ref={imageCarouselRef} 
+                className="relative w-[70%] mx-auto aspect-[4/3] overflow-hidden rounded-lg shadow-lg"
+              >
                 {carouselImages.map((image, index) => (
                   <div
                     key={index}
@@ -147,7 +150,7 @@ const HeroSection = () => {
                       src={image.src}
                       alt={image.alt}
                       fill
-                      sizes="(max-width: 767px) 90vw, 45vw"
+                      sizes="(max-width: 767px) 63vw, 32vw"
                       className="object-cover"
                       data-ai-hint={image.hint}
                       priority={index === 0}
