@@ -2,11 +2,11 @@ import { Button } from '@/components/ui/button';
 import Image from 'next/image';
 import Link from 'next/link';
 import ScrollReveal from './scroll-reveal';
+import { Search } from 'lucide-react'; // Added Search icon
 
 const HeroSection = () => {
   return (
     <section className="relative pt-32 pb-16 md:pt-48 md:pb-24 overflow-hidden min-h-[80vh] flex items-center bg-gradient-to-br from-background to-secondary/80">
-      {/* Removed decorative background blur elements */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         <div className="grid md:grid-cols-2 gap-10 items-center">
           <div className="text-center md:text-left">
@@ -35,7 +35,29 @@ const HeroSection = () => {
                 </Button>
               </div>
             </ScrollReveal>
+
+            {/* New Search-like field */}
+            <ScrollReveal delay={600} animationType="fadeInUp">
+              <div className="mt-12 w-full max-w-xl mx-auto md:mx-0">
+                <div className="relative flex items-center group">
+                  <div 
+                    className="flex-grow pl-6 pr-16 py-4 bg-background/5 hover:bg-background/10 backdrop-blur-sm border border-white/30 hover:border-white/50 transition-all duration-300 rounded-lg text-muted-foreground text-left shadow-sm focus-within:ring-2 focus-within:ring-primary focus-within:border-primary"
+                  >
+                    <span className="opacity-75">e.g., generate a marketing plan for a new SaaS product</span>
+                  </div>
+                  <Button
+                    variant="default" // Primary blue background
+                    size="icon"
+                    className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full w-11 h-11 p-0 flex items-center justify-center group-hover:shadow-lg group-hover:scale-105 focus:scale-105 focus:shadow-lg transition-all duration-300"
+                    aria-label="Search"
+                  >
+                    <Search className="h-5 w-5" />
+                  </Button>
+                </div>
+              </div>
+            </ScrollReveal>
           </div>
+
           <div className="relative mt-10 md:mt-0 h-64 md:h-auto">
             <ScrollReveal delay={300} animationType="fadeIn">
               <Image
@@ -48,7 +70,6 @@ const HeroSection = () => {
                 priority
               />
             </ScrollReveal>
-            {/* Removed floating elements */}
           </div>
         </div>
       </div>
