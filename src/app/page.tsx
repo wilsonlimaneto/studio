@@ -1,29 +1,31 @@
+
 import Header from '@/components/layout/header';
 import Footer from '@/components/layout/footer';
 import HeroSection from '@/components/landing/hero-section';
 import FeatureSection from '@/components/landing/feature-section';
 import TechStackSection from '@/components/landing/tech-stack-section';
 import CTASection from '@/components/landing/cta-section';
-import { Brain, PenTool, BarChart3 } from 'lucide-react';
+import { Brain, PenTool, BarChart3, LucideProps, CircleCheckBig, LayoutGrid } from 'lucide-react';
 
-export default function LandingPage() {
+export default function LandingPage(): JSX.Element {
   return (
     <div className="flex flex-col min-h-screen bg-background">
       <Header />
       <main className="flex-grow">
         <HeroSection />
 
-        <FeatureSection id="features" title="AI-Powered Design Studio"
-          description="Our intuitive drag-and-drop editor, supercharged with AI suggestions, helps you create visually stunning layouts that match your brand. Choose from smart templates or build from scratch with AI guidance."
-          imageUrl="https://placehold.co/600x450.png"
+        <FeatureSection id="features" title="Jurisprudência verdadeira por meio de um assistente"
+          description="O advogado pede ao assistente detalhes sobre um julgado, passando todos os detalhes desejados, e o assistente irá pesquisar e ler os documentos entregando exatamente o que foi solicitado."
+          imageUrl="/assist.png"
           imageAlt="AI Design Studio illustration"
           imageHint="design tool interface"
-          Icon={LayoutGridIcon} // Using a simple SVG for LayoutGrid as it's common and might not be in Lucide directly
+          Icon={LayoutGrid} 
           points={[
-            "Smart template suggestions",
-            "AI-assisted layout generation",
-            "Real-time design feedback",
-            "Brand consistency tools"
+            "Pesquise em linguagem natural",
+            "Receba julgados reais e já verificados",
+            "Em menos de 30 segundos",
+            "Não é curso de prompt",
+            "Esqueça a busca por palavra-chave"
           ]}
         />
 
@@ -65,22 +67,3 @@ export default function LandingPage() {
     </div>
   );
 }
-
-// Simple SVG for LayoutGridIcon as an example if not available or preferred
-const LayoutGridIcon = (props: React.SVGProps<SVGSVGElement>) => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 24 24"
-    fill="none"
-    stroke="currentColor"
-    strokeWidth="2"
-    strokeLinecap="round"
-    strokeLinejoin="round"
-    {...props}
-  >
-    <rect x="3" y="3" width="7" height="7"></rect>
-    <rect x="14" y="3" width="7" height="7"></rect>
-    <rect x="14" y="14" width="7" height="7"></rect>
-    <rect x="3" y="14" width="7" height="7"></rect>
-  </svg>
-);
