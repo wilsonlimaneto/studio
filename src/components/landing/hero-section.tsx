@@ -1,7 +1,6 @@
 
 "use client"; // Required for useState and useEffect
 import React from 'react';
-
 import { useState, useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
@@ -39,6 +38,7 @@ const carouselImages = [
     hint: "ChatGPT"
   }
 ];
+
 const HeroSection = () => {
   const [currentPlaceholderIndex, setCurrentPlaceholderIndex] = useState(0);
   const [animatedPlaceholder, setAnimatedPlaceholder] = useState('');
@@ -47,7 +47,7 @@ const HeroSection = () => {
 
   // Effect for typing animation
   useEffect(() => {
-    if (isTypingComplete && inputValue) return; 
+    if (isTypingComplete && inputValue) return;
 
     const targetText = placeholderTexts[currentPlaceholderIndex];
     if (animatedPlaceholder.length < targetText.length) {
@@ -62,7 +62,7 @@ const HeroSection = () => {
 
   // Effect for 10-second rotation
   useEffect(() => {
-    if (!isTypingComplete || inputValue) return; 
+    if (!isTypingComplete || inputValue) return;
 
     const rotationTimeout = setTimeout(() => {
       setCurrentPlaceholderIndex((prevIndex) => (prevIndex + 1) % placeholderTexts.length);
@@ -80,7 +80,7 @@ const HeroSection = () => {
   useEffect(() => {
     const imageRotationTimer = setInterval(() => {
       setCurrentCarouselImageIndex((prevIndex) => (prevIndex + 1) % carouselImages.length);
-    }, 5000); 
+    }, 5000);
 
     return () => clearInterval(imageRotationTimer);
   }, []);
@@ -113,16 +113,18 @@ const HeroSection = () => {
               </p>
             </ScrollReveal>
             <ScrollReveal delay={400} animationType="fadeIn" className="w-full mt-8">
-              <div className="relative flex flex-col items-center space-y-4 sm:space-y-0 sm:flex-row sm:space-x-2 group">
-                  <Search className="absolute left-3 top-3 text-muted-foreground" />
+              <div className="flex flex-col items-center space-y-4 sm:flex-row sm:space-x-2">
+                <div className="relative w-full sm:flex-grow">
+                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground z-10" />
                   <textarea
                     rows={4}
                     placeholder={animatedPlaceholder + ((!isTypingComplete && !inputValue) ? '|' : '')}
-                    className="w-full pl-10 xs:pl-8 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary bg-transparent border-white text-white placeholder-gray-300 resize-none text-[1.4375rem] md:text-2xl flex-grow"
+                    className="relative w-full pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary bg-transparent border-white text-white placeholder:text-gray-300 resize-none text-lg md:text-xl"
                     value={inputValue}
                     onChange={(e) => setInputValue(e.target.value)}
                     onFocus={() => setIsTypingComplete(true)} // Pause animation on focus
                   />
+                </div>
                 <Button asChild size="lg" className="text-lg px-8 py-3 whitespace-nowrap bg-primary hover:bg-primary/90 w-full sm:w-auto">
                   <Link href="#cta">Buscar</Link>
                 </Button>
@@ -131,10 +133,10 @@ const HeroSection = () => {
           </div>
 
           {/* Col 2: Contains Carousel */}
-          <div className="w-full">
+          <div className="w-full"> {/* Removed flex, flex-col, items-center, space-y-8 */}
             <ScrollReveal delay={600} animationType="fadeIn" className="w-full mt-10 md:mt-0">
-              <div 
-                ref={imageCarouselRef} 
+              <div
+                ref={imageCarouselRef}
                 className="relative w-4/5 mx-auto aspect-[4/3] overflow-hidden rounded-lg shadow-lg"
               >
                 {carouselImages.map((image, index) => (
@@ -148,7 +150,7 @@ const HeroSection = () => {
                       src={image.src}
                       alt={image.alt}
                       fill
-                      sizes="(max-width: 767px) 80vw, 40vw"
+                      sizes="(max-width: 767px) 80vw, 40vw" // Adjusted sizes
                       className="object-cover"
                       data-ai-hint={image.hint}
                       priority={index === 0}
@@ -168,3 +170,4 @@ const HeroSection = () => {
 }
 
 export default HeroSection;
+
