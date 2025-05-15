@@ -12,10 +12,8 @@ export default function LandingPage() {
       <Header />
       <main className="flex-grow">
         <HeroSection />
-        
-        <FeatureSection
-          id="features"
-          title="AI-Powered Design Studio"
+
+        <FeatureSection id="features" title="AI-Powered Design Studio"
           description="Our intuitive drag-and-drop editor, supercharged with AI suggestions, helps you create visually stunning layouts that match your brand. Choose from smart templates or build from scratch with AI guidance."
           imageUrl="https://placehold.co/600x450.png"
           imageAlt="AI Design Studio illustration"
@@ -59,7 +57,7 @@ export default function LandingPage() {
             "Predictive analytics for trends"
           ]}
         />
-        
+
         <TechStackSection />
         <CTASection />
       </main>

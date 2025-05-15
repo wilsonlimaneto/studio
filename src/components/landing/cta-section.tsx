@@ -1,5 +1,6 @@
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
+import { Label } from '@/components/ui/label';
 import ScrollReveal from './scroll-reveal';
 
 const CTASection = () => {
@@ -16,16 +17,29 @@ const CTASection = () => {
             Start building your next great landing page with Landing AI today. Experience the future of web design, powered by intelligence.
           </p>
         </ScrollReveal>
-        <ScrollReveal delay={400}>
-          <div className="mt-10">
-            <Button asChild size="lg" className="text-lg px-10 py-6">
-              <Link href="#">Sign Up - It&apos;s Free!</Link>
+        <ScrollReveal delay={400} className="mt-10">
+          <form className="mt-10 flex flex-col items-center space-y-4">
+            <div className="w-full max-w-sm text-left">
+              <Label htmlFor="name" className="sr-only">Name</Label>
+              <input id="name" type="text" required placeholder="Name" className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary" />
+            </div>
+            <div className="w-full max-w-sm text-left">
+              <Label htmlFor="phone" className="sr-only">Phone</Label>
+              <input id="phone" type="tel" required placeholder="Phone" className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary" />
+            </div>
+            <div className="w-full max-w-sm text-left">
+              <Label htmlFor="email" className="sr-only">Email</Label>
+              <input id="email" type="email" required placeholder="Email" className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-primary" />
+            </div>
+            <Button type="submit" size="lg" className="text-lg px-10 py-6">
+              Submit
             </Button>
-          </div>
+          </form>
         </ScrollReveal>
       </div>
     </section>
   );
 };
-
 export default CTASection;
+
+

@@ -1,6 +1,5 @@
 "use client";
 import { useState, useEffect } from 'react';
-import Logo from '@/components/landing/logo';
 import { Button } from '@/components/ui/button';
 import { Menu, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
@@ -8,9 +7,9 @@ import Link from 'next/link';
 
 const NavLinks = ({ columnLayout = false }: { columnLayout?: boolean }) => (
   <>
-    <Link href="#features" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Features</Link>
-    <Link href="#tech-stack" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Technology</Link>
-    <Link href="#cta" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Get Started</Link>
+    <Link href="#features" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Funcionalidades</Link>
+    <Link href="#tech-stack" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Tecnologia</Link>
+    <Link href="#cta" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Artigo</Link>
   </>
 )
 
@@ -35,11 +34,11 @@ const Header = () => {
     >
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16"> {/* Reduced height */}
-          <Logo svgClassName="h-7" /> {/* Adjusted height slightly for the new logo if needed, or use default */}
+          <img src="/oie_pnD9PzjNbeOy.png" alt="Maestria Logo" className="h-6" />
           <nav className="hidden md:flex items-center space-x-6">
             <NavLinks />
             <Button asChild size="sm">
-              <Link href="#cta">Sign Up</Link>
+              <Link href="#cta">Use Gratuitamente</Link>
             </Button>
           </nav>
           <div className="md:hidden">
