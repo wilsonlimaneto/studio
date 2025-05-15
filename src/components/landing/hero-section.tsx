@@ -37,12 +37,6 @@ const carouselImages = [
     alt: "ChatGPT Image",
     title: "Busca por IA  vs. Palavra-chave e Conectivos",
     hint: "ChatGPT"
-  },
-  {
-    src: "https://placehold.co/600x450.png",
-    alt: "Placeholder Image 3",
-    title: "Título da Imagem 3",
-    hint: "law books"
   }
 ];
 const HeroSection = () => {
@@ -53,7 +47,7 @@ const HeroSection = () => {
 
   // Effect for typing animation
   useEffect(() => {
-    if (isTypingComplete) return;
+    if (isTypingComplete && inputValue) return; // Also pause if user starts typing
 
     const targetText = placeholderTexts[currentPlaceholderIndex];
     if (animatedPlaceholder.length < targetText.length) {
@@ -64,11 +58,11 @@ const HeroSection = () => {
     } else {
       setIsTypingComplete(true);
     }
-  }, [animatedPlaceholder, currentPlaceholderIndex, isTypingComplete]);
+  }, [animatedPlaceholder, currentPlaceholderIndex, isTypingComplete, inputValue]);
 
   // Effect for 10-second rotation
   useEffect(() => {
-    if (!isTypingComplete) return;
+    if (!isTypingComplete || inputValue) return; // Also pause if user starts typing
 
     const rotationTimeout = setTimeout(() => {
       setCurrentPlaceholderIndex((prevIndex) => (prevIndex + 1) % placeholderTexts.length);
@@ -77,7 +71,7 @@ const HeroSection = () => {
     }, ROTATION_INTERVAL_MS);
 
     return () => clearTimeout(rotationTimeout);
-  }, [isTypingComplete]);
+  }, [isTypingComplete, inputValue]);
 
   const imageCarouselRef = useRef<HTMLDivElement>(null);
   const [currentCarouselImageIndex, setCurrentCarouselImageIndex] = useState(0);
@@ -86,10 +80,10 @@ const HeroSection = () => {
   useEffect(() => {
     const imageRotationTimer = setInterval(() => {
       setCurrentCarouselImageIndex((prevIndex) => (prevIndex + 1) % carouselImages.length);
-    }, 5000); 
+    }, 5000);
 
     return () => clearInterval(imageRotationTimer);
-  }, []); 
+  }, []);
 
   useEffect(() => {
     if (imageCarouselRef.current) {
@@ -104,12 +98,12 @@ const HeroSection = () => {
   return (
     <section className="relative pt-32 pb-16 md:pt-48 md:pb-24 overflow-hidden min-h-[80vh] flex items-center bg-gradient-to-br from-background to-secondary/80">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid md:grid-cols-2 gap-10 items-start"> 
-          {/* Col 1: Text content */}
+        <div className="grid md:grid-cols-2 gap-10 items-start">
+          {/* Col 1: Text content + search field */}
           <div className="text-center md:text-left">
             <ScrollReveal>
               <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-foreground">
-                Encontre <span className="text-primary">Jurisprudência verificada</span>, por meio de um assistente de IA que&nbsp;
+                Encontre <span className="text-primary">Jurisprudência verificada</span>, por meio de um assistente de IA que
                 entende exatamente o que você precisa.
               </h1>
             </ScrollReveal>
@@ -118,14 +112,14 @@ const HeroSection = () => {
                 Unimos a facilidade do ChatGPT a julgados <span className="text-primary">verdadeiros e verificados.</span> Experimente o poder de compreensão da busca jurisprudencial <span className="text-primary">semântica:</span>
               </p>
            </ScrollReveal>
-           <ScrollReveal delay={400} animationType="fadeIn" className="w-full flex justify-center md:justify-start mt-8">
-              <div className="w-full flex flex-col items-center space-y-4 sm:flex-row sm:space-y-0 sm:space-x-2">
+           <ScrollReveal delay={400} animationType="fadeIn" className="w-full mt-8">
+              <div className="w-full flex flex-col items-center space-y-4 sm:space-y-0 sm:flex-row sm:space-x-2">
                 <div className="relative flex-grow w-full">
                   <Search className="absolute left-3 top-3 text-muted-foreground" />
                   <textarea
                     rows={4}
-                    placeholder={animatedPlaceholder + (!isTypingComplete ? '|' : '')}
-                    className="w-full pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary bg-transparent border-white text-white placeholder-gray-300 resize-none text-sm md:text-base"
+                    placeholder={animatedPlaceholder + (!isTypingComplete && !inputValue ? '|' : '')}
+                    className="w-full pl-10 xs:pl-8 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary bg-transparent border-white text-white placeholder-gray-300 resize-none text-base md:text-lg"
                     value={inputValue}
                     onChange={(e) => setInputValue(e.target.value)}
                     onFocus={() => setIsTypingComplete(true)} // Pause animation on focus
@@ -139,10 +133,10 @@ const HeroSection = () => {
           </div>
 
           {/* Col 2: Contains Carousel - Aligned to center */}
-          <div className="flex flex-col items-center space-y-10"> 
+          <div className="flex flex-col items-center">
             {/* Carousel Section */}
-            <ScrollReveal delay={400} animationType="fadeIn" className="w-full flex justify-center">
-              <div className="flex justify-center"> 
+            <ScrollReveal delay={600} animationType="fadeIn" className="w-full flex justify-center mt-10"> {/* Added mt-10 here */}
+              <div className="flex justify-center">
                 <div ref={imageCarouselRef} className="relative w-[400px] h-[300px] overflow-hidden rounded-lg shadow-lg">
                   {carouselImages.map((image, index) => (
                     <div
@@ -158,6 +152,7 @@ const HeroSection = () => {
                         sizes="(max-width: 768px) 100vw, 400px"
                         className="object-cover"
                         data-ai-hint={image.hint}
+                        priority={index === 0} // Add priority to the first image for LCP
                       />
                       <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 p-4 text-white text-center">
                         <h3 className="text-xl font-semibold">{image.title}</h3>
