@@ -2,7 +2,6 @@
 "use client";
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
-import Link from 'next/link';
 import { Label } from '@/components/ui/label';
 import ScrollReveal from './scroll-reveal';
 import { Input } from '@/components/ui/input';
@@ -62,6 +61,7 @@ const CTASection = () => {
     
     setSubmissionMessage("Obrigado! Em breve você receberá um contato instruindo como usar nossa busca por assistente!");
 
+    // Clear form fields after submission
     setName('');
     setPhone('');
     setRawPhone('');
@@ -131,23 +131,6 @@ const CTASection = () => {
               </p>
             )}
           </form>
-        </ScrollReveal>
-
-        <ScrollReveal delay={600} className="mt-12">
-          <div className="flex justify-center">
-            <iframe
-              src="https://docs.google.com/forms/d/e/1FAIpQLSeq3odHZQBWFRmdv9ZgTPdm9JSJe_LKS5oL28gD1XKnbnEiAg/viewform?embedded=true"
-              width="400"
-              height="400"
-              frameBorder="0"
-              marginHeight={0}
-              marginWidth={0}
-              title="Formulário de Contato Google"
-              className="max-w-full"
-            >
-              Carregando…
-            </iframe>
-          </div>
         </ScrollReveal>
       </div>
     </section>
