@@ -50,7 +50,7 @@ const HeroSection = () => {
 
   // Effect for typing animation
   useEffect(() => {
-    if (isTypingComplete) return; 
+    if (isTypingComplete) return;
 
     const targetText = placeholderTexts[currentPlaceholderIndex];
     if (animatedPlaceholder.length < targetText.length) {
@@ -65,12 +65,12 @@ const HeroSection = () => {
 
   // Effect for 10-second rotation
   useEffect(() => {
-    if (!isTypingComplete) return; 
+    if (!isTypingComplete) return;
 
     const rotationTimeout = setTimeout(() => {
       setCurrentPlaceholderIndex((prevIndex) => (prevIndex + 1) % placeholderTexts.length);
-      setAnimatedPlaceholder(''); 
-      setIsTypingComplete(false); 
+      setAnimatedPlaceholder('');
+      setIsTypingComplete(false);
     }, ROTATION_INTERVAL_MS);
 
     return () => clearTimeout(rotationTimeout);
@@ -101,7 +101,7 @@ const HeroSection = () => {
   return (
     <section className="relative pt-32 pb-16 md:pt-48 md:pb-24 overflow-hidden min-h-[80vh] flex items-center bg-gradient-to-br from-background to-secondary/80">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid md:grid-cols-2 gap-10 md:items-start"> {/* Changed to md:items-start */}
+        <div className="grid md:grid-cols-2 gap-10 md:items-start">
           {/* Col 1: Text content */}
           <div className="text-center md:text-left">
             <ScrollReveal>
@@ -133,10 +133,10 @@ const HeroSection = () => {
           </div>
 
           {/* Col 2: Contains Carousel (top) and Search Bar (bottom) */}
-          <div className="flex flex-col items-center md:items-start space-y-8 md:space-y-10">
+          <div className="flex flex-col items-center space-y-8 md:space-y-10">
             {/* Carousel Section */}
             <ScrollReveal delay={400} animationType="fadeIn" className="w-full">
-              <div className="flex justify-center md:justify-start">
+              <div className="flex justify-center">
                 <div ref={imageCarouselRef} className="relative w-[400px] h-[300px] overflow-hidden rounded-lg shadow-lg">
                   {carouselImages.map((image, index) => (
                     <div
@@ -145,10 +145,10 @@ const HeroSection = () => {
                         index === currentCarouselImageIndex ? 'opacity-100' : 'opacity-0'
                       }`}
                     >
-                      <Image 
-                        src={image.src} 
-                        alt={image.alt} 
-                        fill // Changed from layout="fill" objectFit="cover"
+                      <Image
+                        src={image.src}
+                        alt={image.alt}
+                        fill
                         sizes="(max-width: 768px) 100vw, 400px"
                         className="object-cover"
                         data-ai-hint={image.hint}
@@ -164,7 +164,7 @@ const HeroSection = () => {
 
             {/* Search bar section */}
             <ScrollReveal delay={300} animationType="fadeIn" className="w-full">
-              <div className="relative flex items-center group max-w-3xl mx-auto md:mx-0 w-full">
+              <div className="relative flex items-center group max-w-3xl mx-auto w-full">
                 <div
                   className="flex-grow pl-6 pr-16 py-4 bg-background/5 hover:bg-background/10 backdrop-blur-sm border border-white/30 hover:border-white/50 transition-all duration-300 rounded-lg text-muted-foreground text-left shadow-sm focus-within:ring-2 focus-within:ring-primary focus-within:border-primary min-h-[3.5rem] flex items-center w-full"
                 >
@@ -191,4 +191,3 @@ const HeroSection = () => {
 };
 
 export default HeroSection;
-
