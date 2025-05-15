@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
 import ScrollReveal from './scroll-reveal';
 import { Input } from '@/components/ui/input';
+import { cn } from '@/lib/utils';
 
 const CTASection = () => {
   const [name, setName] = useState('');
@@ -13,18 +14,31 @@ const CTASection = () => {
   const [email, setEmail] = useState('');
   const [isEmailValid, setIsEmailValid] = useState(false);
   const [isPhoneValid, setIsPhoneValid] = useState(false);
-  const [submissionMessage, setSubmissionMessage] = useState('');
+  const [statusMessage, setStatusMessage] = useState('');
+  const [statusMessageType, setStatusMessageType] = useState<'success' | 'error' | ''>('');
 
   const validateEmail = (emailToValidate: string) => {
+    if (!emailToValidate) return false; // Empty email is not valid for submission
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(emailToValidate);
   };
+
+  const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setName(event.target.value);
+    if (statusMessage) {
+      setStatusMessage('');
+      setStatusMessageType('');
+    }
+  }
 
   const handleEmailChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newEmail = event.target.value;
     setEmail(newEmail);
     setIsEmailValid(validateEmail(newEmail));
-    if (submissionMessage) setSubmissionMessage('');
+    if (statusMessage) {
+      setStatusMessage('');
+      setStatusMessageType('');
+    }
   };
 
   const handlePhoneChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -47,19 +61,38 @@ const CTASection = () => {
     setPhone(masked);
 
     setIsPhoneValid(limitedDigits.length === 11);
-    if (submissionMessage) setSubmissionMessage('');
+    if (statusMessage) {
+      setStatusMessage('');
+      setStatusMessageType('');
+    }
   };
-
-  const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setName(event.target.value);
-    if (submissionMessage) setSubmissionMessage('');
-  }
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log({ name, phone: rawPhone, email });
+    setStatusMessage('');
+    setStatusMessageType('');
+
+    if (!name.trim() || !email.trim() || !rawPhone.trim()) {
+      setStatusMessage("Por favor, preencha todos os campos obrigatórios.");
+      setStatusMessageType('error');
+      return;
+    }
+
+    if (!isEmailValid) {
+      setStatusMessage("Formato de email inválido. Verifique o email digitado.");
+      setStatusMessageType('error');
+      return;
+    }
+
+    if (!isPhoneValid) {
+      setStatusMessage("Telefone inválido. Deve conter 11 dígitos.");
+      setStatusMessageType('error');
+      return;
+    }
     
-    setSubmissionMessage("Obrigado! Em breve você receberá um contato instruindo como usar nossa busca por assistente!");
+    console.log({ name, phone: rawPhone, email });
+    setStatusMessage("Obrigado! Em breve você receberá um contato instruindo como usar nossa busca por assistente!");
+    setStatusMessageType('success');
 
     // Clear form fields after submission
     setName('');
@@ -69,6 +102,12 @@ const CTASection = () => {
     setIsEmailValid(false);
     setIsPhoneValid(false);
   };
+
+  // Button is disabled if a field has content but is invalid.
+  // Allows clicking if fields are empty to trigger our custom "all fields required" message.
+  const isButtonDisabled = 
+    (email.trim() !== '' && !isEmailValid) || 
+    (rawPhone.trim() !== '' && !isPhoneValid);
 
   return (
     <section id="cta" className="py-16 md:py-24 bg-primary/10">
@@ -90,7 +129,6 @@ const CTASection = () => {
               <Input
                 id="name"
                 type="text"
-                required
                 placeholder="Nome Completo"
                 value={name}
                 onChange={handleNameChange}
@@ -102,11 +140,10 @@ const CTASection = () => {
               <Input
                 id="phone"
                 type="tel"
-                required
                 placeholder="(XX) XXXXX-XXXX"
                 value={phone}
                 onChange={handlePhoneChange}
-                maxLength={15}
+                maxLength={15} 
                 className="w-full bg-card text-card-foreground placeholder:text-muted-foreground"
               />
             </div>
@@ -115,19 +152,22 @@ const CTASection = () => {
               <Input
                 id="email"
                 type="email"
-                required
                 placeholder="Seu Melhor Email"
                 value={email}
                 onChange={handleEmailChange}
                 className="w-full bg-card text-card-foreground placeholder:text-muted-foreground"
               />
             </div>
-            <Button type="submit" size="lg" className="text-lg px-10 py-6" disabled={!isEmailValid || !isPhoneValid || !name}>
+            <Button type="submit" size="lg" className="text-lg px-10 py-6" disabled={isButtonDisabled}>
               Cadastrar para Acesso Gratuito
             </Button>
-            {submissionMessage && (
-              <p className="mt-4 text-center text-foreground bg-green-500/20 p-3 rounded-md">
-                {submissionMessage}
+            {statusMessage && (
+              <p className={cn(
+                "mt-4 text-center p-3 rounded-md w-full max-w-sm",
+                statusMessageType === 'success' ? "text-foreground bg-green-500/20" : "",
+                statusMessageType === 'error' ? "text-destructive-foreground bg-destructive/80" : ""
+              )}>
+                {statusMessage}
               </p>
             )}
           </form>
