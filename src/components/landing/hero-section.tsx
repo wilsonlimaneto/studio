@@ -50,7 +50,7 @@ const HeroSection = () => {
 
   // Effect for typing animation
   useEffect(() => {
-    if (isTypingComplete) return; // Don't type if we're in the 10s pause or finished
+    if (isTypingComplete) return; 
 
     const targetText = placeholderTexts[currentPlaceholderIndex];
     if (animatedPlaceholder.length < targetText.length) {
@@ -59,19 +59,18 @@ const HeroSection = () => {
       }, TYPING_SPEED_MS);
       return () => clearTimeout(typingTimeout);
     } else {
-      // Typing for current text is complete
       setIsTypingComplete(true);
     }
   }, [animatedPlaceholder, currentPlaceholderIndex, isTypingComplete]);
 
   // Effect for 10-second rotation
   useEffect(() => {
-    if (!isTypingComplete) return; // Only start rotation timer if current text is fully typed
+    if (!isTypingComplete) return; 
 
     const rotationTimeout = setTimeout(() => {
       setCurrentPlaceholderIndex((prevIndex) => (prevIndex + 1) % placeholderTexts.length);
-      setAnimatedPlaceholder(''); // Reset for the next text
-      setIsTypingComplete(false); // Allow typing effect to start for the new text
+      setAnimatedPlaceholder(''); 
+      setIsTypingComplete(false); 
     }, ROTATION_INTERVAL_MS);
 
     return () => clearTimeout(rotationTimeout);
@@ -84,7 +83,7 @@ const HeroSection = () => {
   useEffect(() => {
     const imageRotationTimer = setInterval(() => {
       setCurrentCarouselImageIndex((prevIndex) => (prevIndex + 1) % carouselImages.length);
-    }, 2000); // Rotate image every 2 seconds
+    }, 5000); // Changed from 2000ms to 5000ms
 
     return () => clearInterval(imageRotationTimer);
   }, []);
@@ -102,7 +101,8 @@ const HeroSection = () => {
   return (
     <section className="relative pt-32 pb-16 md:pt-48 md:pb-24 overflow-hidden min-h-[80vh] flex items-center bg-gradient-to-br from-background to-secondary/80">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid md:grid-cols-2 gap-10 items-center">
+        <div className="grid md:grid-cols-2 gap-10 md:items-start"> {/* Changed to md:items-start */}
+          {/* Col 1: Text content */}
           <div className="text-center md:text-left">
             <ScrollReveal>
               <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-foreground">
@@ -132,10 +132,39 @@ const HeroSection = () => {
             </ScrollReveal>
           </div>
 
-          {/* Search bar section - now occupies the second column on larger screens */}
-          <ScrollReveal delay={300} animationType="fadeIn" className="md:col-start-2 md:row-start-1 md:self-end">
-            <div className="relative mt-10 md:mt-0 w-full flex justify-center md:justify-start">
-              <div className="relative flex items-center group max-w-3xl mx-auto w-full">
+          {/* Col 2: Contains Carousel (top) and Search Bar (bottom) */}
+          <div className="flex flex-col items-center md:items-start space-y-8 md:space-y-10">
+            {/* Carousel Section */}
+            <ScrollReveal delay={400} animationType="fadeIn" className="w-full">
+              <div className="flex justify-center md:justify-start">
+                <div ref={imageCarouselRef} className="relative w-[400px] h-[300px] overflow-hidden rounded-lg shadow-lg">
+                  {carouselImages.map((image, index) => (
+                    <div
+                      key={index}
+                      className={`absolute inset-0 transition-opacity duration-500 ease-in-out ${
+                        index === currentCarouselImageIndex ? 'opacity-100' : 'opacity-0'
+                      }`}
+                    >
+                      <Image 
+                        src={image.src} 
+                        alt={image.alt} 
+                        fill // Changed from layout="fill" objectFit="cover"
+                        sizes="(max-width: 768px) 100vw, 400px"
+                        className="object-cover"
+                        data-ai-hint={image.hint}
+                      />
+                      <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 p-4 text-white text-center">
+                        <h3 className="text-xl font-semibold">{image.title}</h3>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </ScrollReveal>
+
+            {/* Search bar section */}
+            <ScrollReveal delay={300} animationType="fadeIn" className="w-full">
+              <div className="relative flex items-center group max-w-3xl mx-auto md:mx-0 w-full">
                 <div
                   className="flex-grow pl-6 pr-16 py-4 bg-background/5 hover:bg-background/10 backdrop-blur-sm border border-white/30 hover:border-white/50 transition-all duration-300 rounded-lg text-muted-foreground text-left shadow-sm focus-within:ring-2 focus-within:ring-primary focus-within:border-primary min-h-[3.5rem] flex items-center w-full"
                 >
@@ -153,34 +182,6 @@ const HeroSection = () => {
                   <Search className="h-6 w-6" />
                 </Button>
               </div>
-            </div>
-          </ScrollReveal>
-
-          {/* Carousel Section - now occupies the second column on larger screens, placed before the search bar in DOM for visual order via row-start */}
-          <div className="md:col-start-2 md:row-start-1 flex justify-center md:justify-start items-center mb-8 md:mb-0"> {/* Added mb for spacing on mobile */}
-            <ScrollReveal delay={400} animationType="fadeIn">
-              <div ref={imageCarouselRef} className="relative w-[400px] h-[300px] overflow-hidden rounded-lg shadow-lg">
-                {carouselImages.map((image, index) => (
-                  <div
-                    key={index}
-                    className={`absolute inset-0 transition-opacity duration-500 ease-in-out ${
-                      index === currentCarouselImageIndex ? 'opacity-100' : 'opacity-0'
-                    }`}
-                  >
-                    <Image 
-                      src={image.src} 
-                      alt={image.alt} 
-                      layout="fill" 
-                      objectFit="cover" 
-                      sizes="(max-width: 768px) 100vw, 400px"
-                      data-ai-hint={image.hint}
-                    />
-                    <div className="absolute bottom-0 left-0 right-0 bg-black bg-opacity-50 p-4 text-white text-center">
-                      <h3 className="text-xl font-semibold">{image.title}</h3>
-                    </div>
-                  </div>
-                ))}
-              </div>
             </ScrollReveal>
           </div>
         </div>
@@ -190,3 +191,4 @@ const HeroSection = () => {
 };
 
 export default HeroSection;
+
