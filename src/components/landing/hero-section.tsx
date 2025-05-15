@@ -14,7 +14,7 @@ const placeholderTexts = [
   "e.g., write compelling copy for a travel agency",
   "e.g., A/B test headlines for an e-commerce store",
 ];
-const TYPING_SPEED_MS = 100;
+const TYPING_SPEED_MS = 50; // Changed from 100 to 50
 const ROTATION_INTERVAL_MS = 10000; // 10 seconds after typing completes
 
 const HeroSection = () => {
@@ -91,7 +91,7 @@ const HeroSection = () => {
                 alt="Landing AI illustrative interface"
                 width={600}
                 height={400}
-                className="rounded-xl shadow-2xl object-cover mx-auto md:mx-0 md:ml-auto"
+                className="rounded-xl shadow-2xl object-cover mx-auto md:ml-auto md:mx-0"
                 data-ai-hint="abstract interface dark"
                 priority
               />
