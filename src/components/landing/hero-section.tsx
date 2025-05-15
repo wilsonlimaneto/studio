@@ -35,7 +35,7 @@ const carouselImages = [
   {
     src: "/ChatGPT Image 15 de mai. de 2025, 11_52_43.png",
     alt: "ChatGPT Image",
-    title: "Busca por IA  vs. Palavra-chave e Conectivos",
+    title: "Busca por IA vs. Palavra-chave e Conectivos",
     hint: "ChatGPT"
   }
 ];
@@ -47,7 +47,7 @@ const HeroSection = () => {
 
   // Effect for typing animation
   useEffect(() => {
-    if (isTypingComplete && inputValue) return; // Also pause if user starts typing
+    if (isTypingComplete && inputValue) return; 
 
     const targetText = placeholderTexts[currentPlaceholderIndex];
     if (animatedPlaceholder.length < targetText.length) {
@@ -62,7 +62,7 @@ const HeroSection = () => {
 
   // Effect for 10-second rotation
   useEffect(() => {
-    if (!isTypingComplete || inputValue) return; // Also pause if user starts typing
+    if (!isTypingComplete || inputValue) return; 
 
     const rotationTimeout = setTimeout(() => {
       setCurrentPlaceholderIndex((prevIndex) => (prevIndex + 1) % placeholderTexts.length);
@@ -113,19 +113,17 @@ const HeroSection = () => {
               </p>
             </ScrollReveal>
             <ScrollReveal delay={400} animationType="fadeIn" className="w-full mt-8">
-              <div className="w-full flex flex-col items-center space-y-4 sm:space-y-0 sm:flex-row sm:space-x-2">
-                <div className="relative flex-grow w-full">
+              <div className="relative flex flex-col items-center space-y-4 sm:space-y-0 sm:flex-row sm:space-x-2 group">
                   <Search className="absolute left-3 top-3 text-muted-foreground" />
                   <textarea
                     rows={4}
                     placeholder={animatedPlaceholder + ((!isTypingComplete && !inputValue) ? '|' : '')}
-                    className="w-full pl-10 xs:pl-8 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary bg-transparent border-white text-white placeholder-gray-300 resize-none text-[1.4375rem] md:text-2xl"
+                    className="w-full pl-10 xs:pl-8 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary bg-transparent border-white text-white placeholder-gray-300 resize-none text-[1.4375rem] md:text-2xl flex-grow"
                     value={inputValue}
                     onChange={(e) => setInputValue(e.target.value)}
                     onFocus={() => setIsTypingComplete(true)} // Pause animation on focus
                   />
-                </div>
-                <Button asChild size="lg" className="text-lg px-8 py-3 whitespace-nowrap bg-primary hover:bg-primary/90">
+                <Button asChild size="lg" className="text-lg px-8 py-3 whitespace-nowrap bg-primary hover:bg-primary/90 w-full sm:w-auto">
                   <Link href="#cta">Buscar</Link>
                 </Button>
               </div>
@@ -137,7 +135,7 @@ const HeroSection = () => {
             <ScrollReveal delay={600} animationType="fadeIn" className="w-full mt-10 md:mt-0">
               <div 
                 ref={imageCarouselRef} 
-                className="relative w-[70%] mx-auto aspect-[4/3] overflow-hidden rounded-lg shadow-lg"
+                className="relative w-4/5 mx-auto aspect-[4/3] overflow-hidden rounded-lg shadow-lg"
               >
                 {carouselImages.map((image, index) => (
                   <div
@@ -150,7 +148,7 @@ const HeroSection = () => {
                       src={image.src}
                       alt={image.alt}
                       fill
-                      sizes="(max-width: 767px) 63vw, 32vw"
+                      sizes="(max-width: 767px) 80vw, 40vw"
                       className="object-cover"
                       data-ai-hint={image.hint}
                       priority={index === 0}
