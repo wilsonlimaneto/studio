@@ -6,7 +6,6 @@ import Link from 'next/link';
 import { Label } from '@/components/ui/label';
 import ScrollReveal from './scroll-reveal';
 import { Input } from '@/components/ui/input';
-import { useToast } from "@/hooks/use-toast"; // Import useToast
 
 const CTASection = () => {
   const [name, setName] = useState('');
@@ -15,7 +14,7 @@ const CTASection = () => {
   const [email, setEmail] = useState('');
   const [isEmailValid, setIsEmailValid] = useState(false);
   const [isPhoneValid, setIsPhoneValid] = useState(false);
-  const { toast } = useToast(); // Initialize toast
+  const [submissionMessage, setSubmissionMessage] = useState(''); // New state for submission message
 
   const validateEmail = (emailToValidate: string) => {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -26,6 +25,7 @@ const CTASection = () => {
     const newEmail = event.target.value;
     setEmail(newEmail);
     setIsEmailValid(validateEmail(newEmail));
+    if (submissionMessage) setSubmissionMessage(''); // Clear message on new input
   };
 
   const handlePhoneChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -48,21 +48,22 @@ const CTASection = () => {
     setPhone(masked);
 
     setIsPhoneValid(limitedDigits.length === 11);
+    if (submissionMessage) setSubmissionMessage(''); // Clear message on new input
   };
+
+  const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setName(event.target.value);
+    if (submissionMessage) setSubmissionMessage(''); // Clear message on new input
+  }
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     // Handle form submission logic here
     console.log({ name, phone: rawPhone, email }); // Log rawPhone
     
-    // Display toast message
-    toast({
-      title: "Sucesso!",
-      description: "Obrigado! Em breve você receberá um contato instruindo como usar nossa busca por assistente!",
-      variant: "default", // Or "success" if you have such a variant
-    });
+    setSubmissionMessage("Obrigado! Em breve você receberá um contato instruindo como usar nossa busca por assistente!");
 
-    // Reset form or show success message
+    // Reset form fields
     setName('');
     setPhone('');
     setRawPhone('');
@@ -92,9 +93,9 @@ const CTASection = () => {
                 id="name"
                 type="text"
                 required
-                placeholder="Name"
+                placeholder="Nome Completo"
                 value={name}
-                onChange={(e) => setName(e.target.value)}
+                onChange={handleNameChange}
                 className="w-full bg-card text-card-foreground placeholder:text-muted-foreground"
               />
             </div>
@@ -117,15 +118,20 @@ const CTASection = () => {
                 id="email"
                 type="email"
                 required
-                placeholder="Email"
+                placeholder="Seu Melhor Email"
                 value={email}
                 onChange={handleEmailChange}
                 className="w-full bg-card text-card-foreground placeholder:text-muted-foreground"
               />
             </div>
             <Button type="submit" size="lg" className="text-lg px-10 py-6" disabled={!isEmailValid || !isPhoneValid}>
-              Submit
+              Cadastrar para Acesso Gratuito
             </Button>
+            {submissionMessage && (
+              <p className="mt-4 text-center text-foreground bg-green-500/20 p-3 rounded-md">
+                {submissionMessage}
+              </p>
+            )}
           </form>
         </ScrollReveal>
       </div>
