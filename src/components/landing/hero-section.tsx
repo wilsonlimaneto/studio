@@ -1,10 +1,57 @@
+
+"use client"; // Required for useState and useEffect
+
+import { useState, useEffect } from 'react';
 import { Button } from '@/components/ui/button';
 import Image from 'next/image';
 import Link from 'next/link';
 import ScrollReveal from './scroll-reveal';
 import { Search } from 'lucide-react';
 
+const placeholderTexts = [
+  "e.g., generate a marketing plan for a new SaaS product",
+  "e.g., design a landing page for a fitness app",
+  "e.g., write compelling copy for a travel agency",
+  "e.g., A/B test headlines for an e-commerce store",
+];
+const TYPING_SPEED_MS = 100;
+const ROTATION_INTERVAL_MS = 10000; // 10 seconds after typing completes
+
 const HeroSection = () => {
+  const [currentPlaceholderIndex, setCurrentPlaceholderIndex] = useState(0);
+  const [animatedPlaceholder, setAnimatedPlaceholder] = useState('');
+  const [isTypingComplete, setIsTypingComplete] = useState(false);
+
+  // Effect for typing animation
+  useEffect(() => {
+    if (isTypingComplete) return; // Don't type if we're in the 10s pause or finished
+
+    const targetText = placeholderTexts[currentPlaceholderIndex];
+    if (animatedPlaceholder.length < targetText.length) {
+      const typingTimeout = setTimeout(() => {
+        setAnimatedPlaceholder(targetText.substring(0, animatedPlaceholder.length + 1));
+      }, TYPING_SPEED_MS);
+      return () => clearTimeout(typingTimeout);
+    } else {
+      // Typing for current text is complete
+      setIsTypingComplete(true);
+    }
+  }, [animatedPlaceholder, currentPlaceholderIndex, isTypingComplete]);
+
+  // Effect for 10-second rotation
+  useEffect(() => {
+    if (!isTypingComplete) return; // Only start rotation timer if current text is fully typed
+
+    const rotationTimeout = setTimeout(() => {
+      setCurrentPlaceholderIndex((prevIndex) => (prevIndex + 1) % placeholderTexts.length);
+      setAnimatedPlaceholder(''); // Reset for the next text
+      setIsTypingComplete(false); // Allow typing effect to start for the new text
+    }, ROTATION_INTERVAL_MS);
+
+    return () => clearTimeout(rotationTimeout);
+  }, [isTypingComplete]);
+
+
   return (
     <section className="relative pt-32 pb-16 md:pt-48 md:pb-24 overflow-hidden min-h-[80vh] flex items-center bg-gradient-to-br from-background to-secondary/80">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
@@ -52,17 +99,19 @@ const HeroSection = () => {
           </div>
         </div>
 
-        {/* Search-like field - moved below the grid and made wider */}
         <ScrollReveal delay={600} animationType="fadeInUp" className="mt-12 md:mt-16">
           <div className="w-full">
             <div className="relative flex items-center group max-w-3xl mx-auto">
               <div 
-                className="flex-grow pl-6 pr-16 py-4 bg-background/5 hover:bg-background/10 backdrop-blur-sm border border-white/30 hover:border-white/50 transition-all duration-300 rounded-lg text-muted-foreground text-left shadow-sm focus-within:ring-2 focus-within:ring-primary focus-within:border-primary"
+                className="flex-grow pl-6 pr-16 py-4 bg-background/5 hover:bg-background/10 backdrop-blur-sm border border-white/30 hover:border-white/50 transition-all duration-300 rounded-lg text-muted-foreground text-left shadow-sm focus-within:ring-2 focus-within:ring-primary focus-within:border-primary min-h-[3.5rem] flex items-center"
               >
-                <span className="opacity-75">e.g., generate a marketing plan for a new SaaS product</span>
+                <span className="opacity-75">
+                  {animatedPlaceholder || '\u00A0'}{/* \u00A0 is &nbsp; */}
+                  {!isTypingComplete && animatedPlaceholder.length < placeholderTexts[currentPlaceholderIndex].length && <span className="typing-cursor"></span>}
+                </span>
               </div>
               <Button
-                variant="default" // Primary blue background
+                variant="default"
                 size="icon"
                 className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full w-11 h-11 p-0 flex items-center justify-center group-hover:shadow-lg group-hover:scale-105 focus:scale-105 focus:shadow-lg transition-all duration-300"
                 aria-label="Search"
