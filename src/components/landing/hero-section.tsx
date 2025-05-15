@@ -1,4 +1,3 @@
-
 "use client"; // Required for useState and useEffect
 import React from 'react';
 
@@ -127,7 +126,7 @@ const HeroSection = () => {
             </ScrollReveal>
           </div>
 
-          {/* Col 2: Contains Carousel and Search Field */}
+          {/* Col 2: Contains Carousel and Search Field - Aligned to center */}
           <div className="flex flex-col items-center space-y-8 md:space-y-10"> 
             {/* Carousel Section */}
             <ScrollReveal delay={400} animationType="fadeIn" className="w-full flex justify-center">
@@ -159,7 +158,7 @@ const HeroSection = () => {
              
             <ScrollReveal delay={500} animationType="fadeIn" className="w-full flex justify-center">
                 {/* Search bar section - now below carousel in the same column */}
-                <div className="w-full max-w-2xl flex flex-col items-center space-y-4 sm:flex-row sm:space-y-0 sm:space-x-2"> {/* Changed max-w-xl to max-w-2xl */}
+                <div className="w-full max-w-xl flex flex-col items-center space-y-4 sm:flex-row sm:space-y-0 sm:space-x-2">
                   <div className="relative flex-grow w-full">
                     <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
                     <textarea
@@ -173,7 +172,7 @@ const HeroSection = () => {
                     {!isTypingComplete && <span className="typing-cursor"></span>}
                   </div>
                   <Button size="lg" className="text-lg px-8 py-3 whitespace-nowrap bg-primary hover:bg-primary/90">
-                    Buscar
+                    Buscar Jurisprudência Real
                   </Button>
                 </div>
             </ScrollReveal>
@@ -186,5 +185,3 @@ const HeroSection = () => {
 
 export default HeroSection;
 
-
-    
