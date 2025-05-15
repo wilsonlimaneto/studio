@@ -9,12 +9,12 @@ const CTASection = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <ScrollReveal>
           <h2 className="text-3xl md:text-4xl font-bold text-foreground tracking-tight">
-            Transform Your Ideas into <span className="text-primary">Reality</span>
+            <span className="text-primary">Não perca mais tempo</span> com tecnologias que inventam julgados. 
           </h2>
         </ScrollReveal>
         <ScrollReveal delay={200}>
           <p className="mt-4 text-lg text-muted-foreground max-w-xl mx-auto">
-            Start building your next great landing page with Landing AI today. Experience the future of web design, powered by intelligence.
+            Cadastre-se para acessar gratuitamente uma IA jurídica criada, por engenheiros e advogados, com inteligência humana (não nos confunda com gurus de prompt!)
           </p>
         </ScrollReveal>
         <ScrollReveal delay={400} className="mt-10">

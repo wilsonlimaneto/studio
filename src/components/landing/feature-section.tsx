@@ -40,8 +40,8 @@ const FeatureSection: React.FC<FeatureSectionProps> = ({
               <Image
                 src={imageUrl}
                 alt={imageAlt}
-                width={600}
-                height={450}
+ width={480}
+ height={360}
                 className="object-cover w-full h-auto aspect-[4/3] rounded-t-lg"
                 data-ai-hint={imageHint || "feature abstract"}
               />

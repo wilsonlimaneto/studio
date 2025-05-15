@@ -1,5 +1,6 @@
 
 "use client"; // Required for useState and useEffect
+import React from 'react';
 
 import { useState, useEffect, useRef } from 'react';
 import { Button } from '@/components/ui/button';
@@ -18,34 +19,36 @@ const TYPING_SPEED_MS = 50;
 const ROTATION_INTERVAL_MS = 10000; // 10 seconds after typing completes
 
 const carouselImages = [
-  {
-    src: "https://placehold.co/600x450.png",
-    alt: "Placeholder Image 1",
-    title: "Título da Imagem 1",
-    hint: "legal documents"
+ {
+    src: "/gfstartups_resized.jpg",
+ alt: "Google for Startups Accelerator",
+ title: "Startup selecionada pelo Google",
+ hint: "Google for Startups logo"
   },
   {
-    src: "https://placehold.co/600x450.png",
-    alt: "Placeholder Image 2",
-    title: "Título da Imagem 2",
-    hint: "courtroom gavel"
+ src: "/verificado_papel_600x450.jpg",
+    alt: "Jurisprudence documents with verification stamp",
+    title: "Jurisprudência real e já verificada",
+    hint: "Verified documents",
+  },
+
+  {
+    src: "/ChatGPT Image 15 de mai. de 2025, 11_52_43.png",
+    alt: "ChatGPT Image",
+    title: "Busca por IA  vs. Palavra-chave e Conectivos",
+    hint: "ChatGPT"
   },
   {
     src: "https://placehold.co/600x450.png",
     alt: "Placeholder Image 3",
     title: "Título da Imagem 3",
     hint: "law books"
-  },
-  {
-    src: "https://placehold.co/600x450.png",
-    alt: "Placeholder Image 4",
-    title: "Título da Imagem 4",
-    hint: "justice scale"
-  },
+  }
 ];
 const HeroSection = () => {
   const [currentPlaceholderIndex, setCurrentPlaceholderIndex] = useState(0);
   const [animatedPlaceholder, setAnimatedPlaceholder] = useState('');
+  const [inputValue, setInputValue] = React.useState('');
   const [isTypingComplete, setIsTypingComplete] = useState(false);
 
   // Effect for typing animation
@@ -83,10 +86,10 @@ const HeroSection = () => {
   useEffect(() => {
     const imageRotationTimer = setInterval(() => {
       setCurrentCarouselImageIndex((prevIndex) => (prevIndex + 1) % carouselImages.length);
-    }, 5000); // Changed from 2000ms to 5000ms
+    }, 5000); 
 
     return () => clearInterval(imageRotationTimer);
-  }, []);
+  }, []); 
 
   useEffect(() => {
     if (imageCarouselRef.current) {
@@ -101,42 +104,34 @@ const HeroSection = () => {
   return (
     <section className="relative pt-32 pb-16 md:pt-48 md:pb-24 overflow-hidden min-h-[80vh] flex items-center bg-gradient-to-br from-background to-secondary/80">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid md:grid-cols-2 gap-10 md:items-start">
+        <div className="grid md:grid-cols-2 gap-10 items-start"> 
           {/* Col 1: Text content */}
           <div className="text-center md:text-left">
             <ScrollReveal>
               <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-foreground">
-                Encontre <span className="text-primary">Jurisprudência verificada</span>, por meio de um assistente de IA, que
+                Encontre <span className="text-primary">Jurisprudência verificada</span>, por meio de um assistente de IA que&nbsp;
                 entende exatamente o que você precisa.
               </h1>
             </ScrollReveal>
-            <ScrollReveal delay={200}>
+             <ScrollReveal delay={200}>
               <p className="mt-6 text-lg sm:text-xl text-muted-foreground">
-                Unimos a facilidade do ChatGPT a julgados <span className="text-primary">verdadeiros e verificados.</span>
+                Unimos a facilidade do ChatGPT a julgados <span className="text-primary">verdadeiros e verificados.</span> Experimente o poder de compreensão da busca jurisprudencial <span className="text-primary">semântica:</span>
               </p>
-            </ScrollReveal>
-            <ScrollReveal delay={300}>
+           </ScrollReveal>
+            <ScrollReveal delay={400}>
               <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-                <Button asChild size="lg" className="text-lg px-8 py-6 flex items-center">
+                <Button asChild size="lg" className="text-lg px-8 py-6">
                   <Link href="#cta">Use Gratuitamente</Link>
-                </Button>
-                <Button
-                  asChild
-                  variant="secondary"
-                  size="lg"
-                  className="text-lg px-8 py-6"
-                >
-                  <Link href="#features">Entenda mais</Link>
                 </Button>
               </div>
             </ScrollReveal>
           </div>
 
-          {/* Col 2: Contains Carousel (top) and Search Bar (bottom) */}
-          <div className="flex flex-col items-center space-y-8 md:space-y-10">
+          {/* Col 2: Contains Carousel and Search Field */}
+          <div className="flex flex-col items-center space-y-8 md:space-y-10"> 
             {/* Carousel Section */}
-            <ScrollReveal delay={400} animationType="fadeIn" className="w-full">
-              <div className="flex justify-center">
+            <ScrollReveal delay={400} animationType="fadeIn" className="w-full flex justify-center">
+              <div className="flex justify-center"> 
                 <div ref={imageCarouselRef} className="relative w-[400px] h-[300px] overflow-hidden rounded-lg shadow-lg">
                   {carouselImages.map((image, index) => (
                     <div
@@ -161,33 +156,35 @@ const HeroSection = () => {
                 </div>
               </div>
             </ScrollReveal>
-
-            {/* Search bar section */}
-            <ScrollReveal delay={300} animationType="fadeIn" className="w-full">
-              <div className="relative flex items-center group max-w-3xl mx-auto w-full">
-                <div
-                  className="flex-grow pl-6 pr-16 py-4 bg-background/5 hover:bg-background/10 backdrop-blur-sm border border-white/30 hover:border-white/50 transition-all duration-300 rounded-lg text-muted-foreground text-left shadow-sm focus-within:ring-2 focus-within:ring-primary focus-within:border-primary min-h-[3.5rem] flex items-center w-full"
-                >
-                  <span className="opacity-75">
-                    {animatedPlaceholder || '\u00A0'}{/* \u00A0 is &nbsp; */}
-                    {!isTypingComplete && animatedPlaceholder.length < placeholderTexts[currentPlaceholderIndex].length && <span className="typing-cursor"></span>}
-                  </span>
+             
+            <ScrollReveal delay={500} animationType="fadeIn" className="w-full flex justify-center">
+                {/* Search bar section - now below carousel in the same column */}
+                <div className="w-full max-w-2xl flex flex-col items-center space-y-4 sm:flex-row sm:space-y-0 sm:space-x-2"> {/* Changed max-w-xl to max-w-2xl */}
+                  <div className="relative flex-grow w-full">
+                    <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+                    <textarea
+                      rows={3}
+                      placeholder={animatedPlaceholder}
+                      className="w-full pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary bg-transparent border-white text-white placeholder-gray-300 resize-none overflow-hidden text-sm md:text-base"
+                      value={inputValue}
+                      onChange={(e) => setInputValue(e.target.value)}
+                      onFocus={() => setIsTypingComplete(true)} // Pause animation on focus
+                    />
+                    {!isTypingComplete && <span className="typing-cursor"></span>}
+                  </div>
+                  <Button size="lg" className="text-lg px-8 py-3 whitespace-nowrap bg-primary hover:bg-primary/90">
+                    Buscar
+                  </Button>
                 </div>
-                <Button
-                  variant="default"
-                  size="icon"
-                  className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full w-11 h-11 p-0 flex items-center justify-center group-hover:shadow-lg group-hover:scale-105 focus:scale-105 focus:shadow-lg transition-all duration-300"
-                  aria-label="Search"
-                >
-                  <Search className="h-6 w-6" />
-                </Button>
-              </div>
             </ScrollReveal>
           </div>
         </div>
       </div>
     </section>
   );
-};
+}
 
 export default HeroSection;
+
+
+    

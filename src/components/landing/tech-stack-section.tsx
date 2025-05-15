@@ -1,4 +1,4 @@
-import { Brain, Bot, Zap, LayoutGrid, PenTool, BarChart3, Database, Cloud, Code } from 'lucide-react';
+import { Brain, Bot, Zap, MessageSquare, Database, Scale } from 'lucide-react';
 import ScrollReveal from './scroll-reveal';
 import { Card, CardContent } from '@/components/ui/card';
 
@@ -8,12 +8,11 @@ interface TechItem {
 }
 
 const techStack: TechItem[] = [
-  { name: 'Advanced AI Models', Icon: Brain },
-  { name: 'Automation Bots', Icon: Bot },
-  { name: 'Real-time Processing', Icon: Zap },
-  { name: 'Next.js Framework', Icon: Code },
-  { name: 'Cloud Infrastructure', Icon: Cloud },
-  { name: 'Scalable Databases', Icon: Database },
+  { name: 'Modelo de IA específico para advogados', Icon: Brain },
+  { name: 'Pesquisa por assistente que entende o contexto jurídico da sua busca', Icon: Bot },
+  { name: 'Jurisprudência relevante e verificada em poucos segundos', Icon: Zap },
+  { name: 'Pesquisa em linguagem natural', Icon: MessageSquare },
+  { name: 'Melhore a fundamentação e maximize a chance de êxito', Icon: Scale }
 ];
 
 const TechStackSection = () => {
@@ -22,13 +21,13 @@ const TechStackSection = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <ScrollReveal>
           <h2 className="text-3xl md:text-4xl font-bold text-foreground text-center tracking-tight">
-            Powered by Cutting-Edge Technology
+          Mas por que na Maestria funciona e no ChatGPT não?
           </h2>
           <p className="mt-4 text-lg text-muted-foreground text-center max-w-2xl mx-auto">
-            Our platform is built on a robust and scalable infrastructure, ensuring reliability and top performance for your landing pages.
+            A Maestria possui <span className="text-primary">modelo próprio e específico treinado para selecionar documentos reais</span> (e não para gerar documentos em resposta a meros prompts)
           </p>
         </ScrollReveal>
-        <div className="mt-12 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6 md:gap-8">
+        <div className="mt-12 grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-6 md:gap-8 justify-items-center">
           {techStack.map((tech, index) => (
             <ScrollReveal key={tech.name} delay={index * 100}>
               <Card className="text-center hover:shadow-xl transition-shadow duration-300">
