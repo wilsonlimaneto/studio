@@ -2,7 +2,7 @@ import { Button } from '@/components/ui/button';
 import Image from 'next/image';
 import Link from 'next/link';
 import ScrollReveal from './scroll-reveal';
-import { Search } from 'lucide-react'; // Added Search icon
+import { Search } from 'lucide-react';
 
 const HeroSection = () => {
   return (
@@ -35,27 +35,6 @@ const HeroSection = () => {
                 </Button>
               </div>
             </ScrollReveal>
-
-            {/* New Search-like field */}
-            <ScrollReveal delay={600} animationType="fadeInUp">
-              <div className="mt-12 w-full max-w-xl mx-auto md:mx-0">
-                <div className="relative flex items-center group">
-                  <div 
-                    className="flex-grow pl-6 pr-16 py-4 bg-background/5 hover:bg-background/10 backdrop-blur-sm border border-white/30 hover:border-white/50 transition-all duration-300 rounded-lg text-muted-foreground text-left shadow-sm focus-within:ring-2 focus-within:ring-primary focus-within:border-primary"
-                  >
-                    <span className="opacity-75">e.g., generate a marketing plan for a new SaaS product</span>
-                  </div>
-                  <Button
-                    variant="default" // Primary blue background
-                    size="icon"
-                    className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full w-11 h-11 p-0 flex items-center justify-center group-hover:shadow-lg group-hover:scale-105 focus:scale-105 focus:shadow-lg transition-all duration-300"
-                    aria-label="Search"
-                  >
-                    <Search className="h-5 w-5" />
-                  </Button>
-                </div>
-              </div>
-            </ScrollReveal>
           </div>
 
           <div className="relative mt-10 md:mt-0 h-64 md:h-auto">
@@ -65,13 +44,34 @@ const HeroSection = () => {
                 alt="Landing AI illustrative interface"
                 width={600}
                 height={400}
-                className="rounded-xl shadow-2xl object-cover mx-auto"
+                className="rounded-xl shadow-2xl object-cover mx-auto md:mx-0 md:ml-auto"
                 data-ai-hint="abstract interface dark"
                 priority
               />
             </ScrollReveal>
           </div>
         </div>
+
+        {/* Search-like field - moved below the grid and made wider */}
+        <ScrollReveal delay={600} animationType="fadeInUp" className="mt-12 md:mt-16">
+          <div className="w-full">
+            <div className="relative flex items-center group max-w-3xl mx-auto">
+              <div 
+                className="flex-grow pl-6 pr-16 py-4 bg-background/5 hover:bg-background/10 backdrop-blur-sm border border-white/30 hover:border-white/50 transition-all duration-300 rounded-lg text-muted-foreground text-left shadow-sm focus-within:ring-2 focus-within:ring-primary focus-within:border-primary"
+              >
+                <span className="opacity-75">e.g., generate a marketing plan for a new SaaS product</span>
+              </div>
+              <Button
+                variant="default" // Primary blue background
+                size="icon"
+                className="absolute right-2 top-1/2 -translate-y-1/2 rounded-full w-11 h-11 p-0 flex items-center justify-center group-hover:shadow-lg group-hover:scale-105 focus:scale-105 focus:shadow-lg transition-all duration-300"
+                aria-label="Search"
+              >
+                <Search className="h-5 w-5" />
+              </Button>
+            </div>
+          </div>
+        </ScrollReveal>
       </div>
     </section>
   );
