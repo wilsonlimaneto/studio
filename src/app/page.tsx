@@ -15,9 +15,9 @@ export default function LandingPage(): JSX.Element {
         <HeroSection />
 
         <FeatureSection id="features" title="Jurisprudência verdadeira por meio de um assistente"
-          description="O advogado pede ao assistente detalhes sobre um julgado, passando todos os detalhes desejados, e o assistente irá pesquisar e ler os documentos entregando exatamente o que foi solicitado."
-          imageUrl="/assist.png"
-          imageAlt="AI Design Studio illustration"
+          description="O advogado pede ao assistente que encontre um julgado, passando todos os detalhes desejados, e o assistente irá pesquisar e ler os documentos entregando exatamente o que foi solicitado."
+          imageUrl="/assistente.png"
+          imageAlt="Advogado usando assistente de IA"
           imageHint="design tool interface"
           Icon={LayoutGrid} 
           points={[
@@ -30,31 +30,31 @@ export default function LandingPage(): JSX.Element {
         />
 
         <FeatureSection
-          title="Compelling Content, Instantly"
-          description="Never stare at a blank page again. Landing AI generates persuasive headlines, engaging body copy, and effective calls-to-action tailored to your audience and goals."
-          imageUrl="https://placehold.co/600x450.png"
+          title="Funcionalidades Inovadoras"
+          description="Além de aposentar as ferramentas de busca baseadas em palavra-chave, Maestria supera todas as IAs genéricas com modelos treinados e refinados no conhecimento jurídico."
+          imageUrl="/chatbot.png"
           imageAlt="AI Content Generation illustration"
           imageHint="writing assistant document"
           Icon={PenTool}
           reverseOrder={true}
           points={[
-            "Automated headline creation",
-            "Engaging body copy generation",
-            "Targeted call-to-action writing",
-            "Multiple tone & style options"
+            "Economize tempo",
+            "Faça perguntas ao Inteiro Teor",
+            "Leia o resumo das ìntegras",
+            "Encontre os precedentes vinculantes (Art. 927 CPC) "
           ]}
         />
 
         <FeatureSection
-          title="Optimization on Autopilot"
-          description="Let AI analyze performance and suggest A/B tests to continuously improve your conversion rates. Focus on your business while Landing AI fine-tunes your pages."
+          title="Abandone de vez cursos de prompts"
+          description="Maestria foi desenvolvida por time integrado por engenheiros e advogados com conhecimento sólido no assunto. Não existe guru aventureiro de Instagram"
           imageUrl="https://placehold.co/600x450.png"
           imageAlt="AI Optimization illustration"
           imageHint="analytics dashboard chart"
           Icon={BarChart3}
           points={[
-            "Automated A/B testing suggestions",
-            "Performance tracking & insights",
+            "Ferramenta independente de BigTech",
+            "Sem risco de uso dos dados pela",
             "Conversion rate optimization",
             "Predictive analytics for trends"
           ]}
