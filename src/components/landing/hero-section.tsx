@@ -131,8 +131,8 @@ const HeroSection = () => {
                     onFocus={() => setIsTypingComplete(true)} // Pause animation on focus
                   />
                 </div>
-                <Button size="lg" className="text-lg px-8 py-3 whitespace-nowrap bg-primary hover:bg-primary/90">
-                  Buscar
+                <Button asChild size="lg" className="text-lg px-8 py-3 whitespace-nowrap bg-primary hover:bg-primary/90">
+                  <Link href="#cta">Buscar</Link>
                 </Button>
               </div>
           </ScrollReveal>
@@ -175,3 +175,4 @@ const HeroSection = () => {
 }
 
 export default HeroSection;
+
