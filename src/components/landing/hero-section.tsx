@@ -119,7 +119,7 @@ const HeroSection = () => {
               </p>
            </ScrollReveal>
            <ScrollReveal delay={400} animationType="fadeIn" className="w-full flex justify-center mt-8">
-              <div className="w-full max-w-xl flex flex-col items-center space-y-4 sm:flex-row sm:space-y-0 sm:space-x-2">
+              <div className="w-full max-w-2xl flex flex-col items-center space-y-4 sm:flex-row sm:space-y-0 sm:space-x-2">
                 <div className="relative flex-grow w-full">
                   <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
                   <textarea
@@ -133,7 +133,7 @@ const HeroSection = () => {
                   {!isTypingComplete && <span className="typing-cursor"></span>}
                 </div>
                 <Button size="lg" className="text-lg px-8 py-3 whitespace-nowrap bg-primary hover:bg-primary/90">
-                  Buscar Jurisprudência Real
+                  Buscar
                 </Button>
               </div>
           </ScrollReveal>
