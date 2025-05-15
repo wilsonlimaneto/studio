@@ -118,12 +118,12 @@ const HeroSection = () => {
                 Unimos a facilidade do ChatGPT a julgados <span className="text-primary">verdadeiros e verificados.</span> Experimente o poder de compreensão da busca jurisprudencial <span className="text-primary">semântica:</span>
               </p>
            </ScrollReveal>
-           <ScrollReveal delay={400} animationType="fadeIn" className="w-full flex justify-center mt-8">
+           <ScrollReveal delay={400} animationType="fadeIn" className="w-full flex justify-center md:justify-start mt-8">
               <div className="w-full max-w-2xl flex flex-col items-center space-y-4 sm:flex-row sm:space-y-0 sm:space-x-2">
                 <div className="relative flex-grow w-full">
-                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+                  <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground" />
                   <textarea
-                    rows={3}
+                    rows={1}
                     placeholder={animatedPlaceholder}
                     className="w-full pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-primary bg-transparent border-white text-white placeholder-gray-300 resize-none overflow-hidden text-sm md:text-base"
                     value={inputValue}
@@ -140,7 +140,7 @@ const HeroSection = () => {
           </div>
 
           {/* Col 2: Contains Carousel - Aligned to center */}
-          <div className="flex flex-col items-center"> 
+          <div className="flex flex-col items-center space-y-10"> 
             {/* Carousel Section */}
             <ScrollReveal delay={400} animationType="fadeIn" className="w-full flex justify-center">
               <div className="flex justify-center"> 
