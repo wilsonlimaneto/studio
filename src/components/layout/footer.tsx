@@ -1,5 +1,5 @@
 import Logo from '@/components/landing/logo';
-import { Github, Linkedin, Twitter } from 'lucide-react';
+import { Youtube, Instagram, Linkedin } from 'lucide-react';
 import Link from 'next/link';
 
 const Footer = () => {
@@ -9,7 +9,7 @@ const Footer = () => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
           <div>
-            <Logo svgClassName="h-7" /> {/* Adjusted height slightly for the new logo if needed, or use default */}
+            <Logo svgClassName="h-7" />
             <p className="mt-2 text-sm text-muted-foreground">
               Craft Intelligent Landing Pages, Effortlessly.
             </p>
@@ -26,14 +26,14 @@ const Footer = () => {
           <div>
             <h3 className="text-lg font-semibold text-foreground">Connect With Us</h3>
             <div className="flex space-x-4 mt-4">
-              <Link href="#" aria-label="Twitter" className="text-muted-foreground hover:text-primary transition-colors">
-                <Twitter className="h-6 w-6" />
+              <Link href="#" aria-label="YouTube" className="text-muted-foreground hover:text-primary transition-colors">
+                <Youtube className="h-6 w-6" />
+              </Link>
+              <Link href="#" aria-label="Instagram" className="text-muted-foreground hover:text-primary transition-colors">
+                <Instagram className="h-6 w-6" />
               </Link>
               <Link href="#" aria-label="LinkedIn" className="text-muted-foreground hover:text-primary transition-colors">
                 <Linkedin className="h-6 w-6" />
-              </Link>
-              <Link href="#" aria-label="GitHub" className="text-muted-foreground hover:text-primary transition-colors">
-                <Github className="h-6 w-6" />
               </Link>
             </div>
           </div>
