@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Label } from '@/components/ui/label';
+import Image from 'next/image';
 import ScrollReveal from './scroll-reveal';
 import { Input } from '@/components/ui/input';
 import { cn } from '@/lib/utils';
@@ -192,6 +193,12 @@ const CTASection = () => {
                 {statusMessage}
               </p>
             )}
+            <div className="mt-8">
+              <Image 
+                src="/googleforstartups.png" 
+                alt="Google for Startups"
+ width={200} height={100} />
+            </div>
           </form>
         </ScrollReveal>
       </div>
