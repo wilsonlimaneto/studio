@@ -9,7 +9,6 @@ const NavLinks = ({ columnLayout = false }: { columnLayout?: boolean }) => (
   <>
     <Link href="#features" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Funcionalidades</Link>
     <Link href="#tech-stack" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Tecnologia</Link>
-    <Link href="#cta" className="text-sm font-medium text-muted-foreground hover:text-foreground transition-colors">Artigo</Link>
   </>
 )
 

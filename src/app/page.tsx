@@ -45,20 +45,7 @@ export default function LandingPage(): JSX.Element {
           ]}
         />
 
-        <FeatureSection
-          title="Abandone de vez cursos de prompts"
-          description="Maestria foi desenvolvida por time integrado por engenheiros e advogados com conhecimento sólido no assunto. Não existe guru aventureiro de Instagram"
-          imageUrl="https://placehold.co/600x450.png"
-          imageAlt="AI Optimization illustration"
-          imageHint="analytics dashboard chart"
-          Icon={BarChart3}
-          points={[
-            "Ferramenta independente de BigTech",
-            "Sem risco de uso dos dados pela",
-            "Conversion rate optimization",
-            "Predictive analytics for trends"
-          ]}
-        />
+
 
         <TechStackSection />
         <CTASection />

@@ -12,35 +12,35 @@ const Footer = () => {
               <img src="/oie_pnD9PzjNbeOy.png" alt="Maestria Logo" className="h-6" />
             </Link>
             <p className="mt-2 text-sm text-muted-foreground">
-              Craft Intelligent Landing Pages, Effortlessly.
+              Faça buscas Inteligentes, sem esforço. Ganhe mais causas.
             </p>
           </div>
           <div>
-            <h3 className="text-lg font-semibold text-foreground">Quick Links</h3>
+            <h3 className="text-lg font-semibold text-foreground">Links rápidos</h3>
             <ul className="mt-4 space-y-2 text-sm">
-              <li><Link href="#features" className="text-muted-foreground hover:text-primary transition-colors">Features</Link></li>
-              <li><Link href="#tech-stack" className="text-muted-foreground hover:text-primary transition-colors">Technology</Link></li>
-              <li><Link href="#cta" className="text-muted-foreground hover:text-primary transition-colors">Get Started</Link></li>
-              <li><Link href="#" className="text-muted-foreground hover:text-primary transition-colors">Privacy Policy</Link></li>
+              <li><Link href="#features" className="text-muted-foreground hover:text-primary transition-colors">Funcionalidades</Link></li>
+              <li><Link href="#tech-stack" className="text-muted-foreground hover:text-primary transition-colors">Tecnologia</Link></li>
+              
+              
             </ul>
           </div>
           <div>
-            <h3 className="text-lg font-semibold text-foreground">Connect With Us</h3>
+            <h3 className="text-lg font-semibold text-foreground">Siga nossas redes!</h3>
             <div className="flex space-x-4 mt-4">
-              <Link href="#" aria-label="YouTube" className="text-muted-foreground hover:text-primary transition-colors">
+              <Link href="https://www.youtube.com/@Maestrialaw" aria-label="YouTube" className="text-muted-foreground hover:text-primary transition-colors">
                 <Youtube className="h-6 w-6" />
               </Link>
-              <Link href="#" aria-label="Instagram" className="text-muted-foreground hover:text-primary transition-colors">
+              <Link href="https://www.instagram.com/maestrialaw/" aria-label="Instagram" className="text-muted-foreground hover:text-primary transition-colors">
                 <Instagram className="h-6 w-6" />
               </Link>
-              <Link href="#" aria-label="LinkedIn" className="text-muted-foreground hover:text-primary transition-colors">
+              <Link href="https://www.linkedin.com/company/maestrialaw/" aria-label="LinkedIn" className="text-muted-foreground hover:text-primary transition-colors">
                 <Linkedin className="h-6 w-6" />
               </Link>
             </div>
           </div>
         </div>
         <div className="mt-8 pt-8 border-t border-border text-center text-sm text-muted-foreground">
-          <p>&copy; {currentYear} Landing AI. All rights reserved.</p>
+          <p>&copy; {currentYear} Maetria Law. Direitos Reservados 2025</p>
         </div>
       </div>
     </footer>
