@@ -18,7 +18,7 @@ const CTASection = () => {
   const [statusMessageType, setStatusMessageType] = useState<'success' | 'error' | ''>('');
 
   const validateEmail = (emailToValidate: string) => {
-    if (!emailToValidate) return false; // Empty email is not valid for submission
+    if (!emailToValidate) return false;
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     return emailRegex.test(emailToValidate);
   };
@@ -67,7 +67,7 @@ const CTASection = () => {
     }
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setStatusMessage('');
     setStatusMessageType('');
@@ -90,21 +90,43 @@ const CTASection = () => {
       return;
     }
     
-    console.log({ name, phone: rawPhone, email });
-    setStatusMessage("Obrigado! Em breve você receberá um contato instruindo como usar nossa busca por assistente!");
-    setStatusMessageType('success');
+    const webhookUrl = 'https://hook.us2.make.com/qw9rcxpxkxjn9sads59yc2sdddrvw8vg';
+    const params = new URLSearchParams({
+      nome: name,
+      fone: rawPhone,
+      email: email,
+    });
 
-    // Clear form fields after submission
-    setName('');
-    setPhone('');
-    setRawPhone('');
-    setEmail('');
-    setIsEmailValid(false);
-    setIsPhoneValid(false);
+    try {
+      const response = await fetch(`${webhookUrl}?${params.toString()}`, {
+        method: 'GET', // Or 'POST' if your webhook expects it, but query params usually go with GET
+      });
+
+      if (response.ok) {
+        setStatusMessage("Obrigado! Em breve você receberá um contato instruindo como usar nossa busca por assistente!");
+        setStatusMessageType('success');
+        // Clear form fields after successful submission
+        setName('');
+        setPhone('');
+        setRawPhone('');
+        setEmail('');
+        setIsEmailValid(false);
+        setIsPhoneValid(false);
+      } else {
+        // Handle server errors (e.g., response.status is 4xx or 5xx)
+        const errorData = await response.text();
+        console.error('Webhook error:', errorData);
+        setStatusMessage("Ocorreu um erro ao enviar seus dados. Por favor, tente novamente.");
+        setStatusMessageType('error');
+      }
+    } catch (error) {
+      // Handle network errors or other issues with the fetch call
+      console.error('Network error or other issue:', error);
+      setStatusMessage("Ocorreu um erro de conexão. Por favor, verifique sua internet e tente novamente.");
+      setStatusMessageType('error');
+    }
   };
 
-  // Button is disabled if a field has content but is invalid.
-  // Allows clicking if fields are empty to trigger our custom "all fields required" message.
   const isButtonDisabled = 
     (email.trim() !== '' && !isEmailValid) || 
     (rawPhone.trim() !== '' && !isPhoneValid);
@@ -125,7 +147,7 @@ const CTASection = () => {
         <ScrollReveal delay={400} className="mt-10">
           <form onSubmit={handleSubmit} className="mt-10 flex flex-col items-center space-y-4">
             <div className="w-full max-w-sm text-left">
-              <Label htmlFor="name" className="sr-only">Name</Label>
+              <Label htmlFor="name" className="sr-only">Nome Completo</Label>
               <Input
                 id="name"
                 type="text"
@@ -136,7 +158,7 @@ const CTASection = () => {
               />
             </div>
             <div className="w-full max-w-sm text-left">
-              <Label htmlFor="phone" className="sr-only">Phone</Label>
+              <Label htmlFor="phone" className="sr-only">Telefone</Label>
               <Input
                 id="phone"
                 type="tel"
@@ -148,7 +170,7 @@ const CTASection = () => {
               />
             </div>
             <div className="w-full max-w-sm text-left">
-              <Label htmlFor="email" className="sr-only">Email</Label>
+              <Label htmlFor="email" className="sr-only">Seu Melhor Email</Label>
               <Input
                 id="email"
                 type="email"
