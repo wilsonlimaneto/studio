@@ -14,8 +14,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Landing AI',
-  description: 'Craft Intelligent Landing Pages, Effortlessly.',
+  title: 'Maestria Law',
+  description: 'Pesdquise jurisprudência real e verificada com IA que entende exatamente o que você precisa.',
 };
 
 export default function RootLayout({
