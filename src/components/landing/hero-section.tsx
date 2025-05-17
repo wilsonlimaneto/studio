@@ -104,7 +104,7 @@ const HeroSection = () => {
             <ScrollReveal className="w-full">
               <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-foreground">
                 Encontre <span className="text-primary">Jurisprudência verificada</span>, por meio de um assistente de IA que
-                entrega exatamente o que você precisa.
+                entrega exatamente o julgado que você precisa.
               </h1>
             </ScrollReveal>
             <ScrollReveal delay={200} className="w-full">
